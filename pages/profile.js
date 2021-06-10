@@ -1,14 +1,15 @@
-import Link from 'next/link'
-import { supabase } from '../utils/initSupabase'
+import Link from "next/link";
+import React from "react";
+import { supabase } from "../utils/initSupabase";
 
 export default function Profile({ user }) {
   return (
-    <div style={{ maxWidth: '520px', margin: '96px auto' }}>
+    <div style={{ maxWidth: "520px", margin: "96px auto" }}>
       <h4>You're signed in</h4>
       <h5>Email: {user.email}</h5>
       <hr />
 
-      <div style={{ color: 'green' }}>
+      <div style={{ color: "green" }}>
         User data retrieved server-side (from Cookie in getServerSideProps):
       </div>
       <div>
@@ -21,17 +22,17 @@ export default function Profile({ user }) {
         </Link>
       </div>
     </div>
-  )
+  );
 }
 
 export async function getServerSideProps({ req }) {
-  const { user } = await supabase.auth.api.getUserByCookie(req)
+  const { user } = await supabase.auth.api.getUserByCookie(req);
 
   if (!user) {
     // If no user, redirect to index.
-    return { props: {}, redirect: { destination: '/', permanent: false } }
+    return { props: {}, redirect: { destination: "/", permanent: false } };
   }
 
   // If there is a user, return it.
-  return { props: { user } }
+  return { props: { user } };
 }

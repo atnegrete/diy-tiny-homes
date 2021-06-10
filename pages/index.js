@@ -1,4 +1,3 @@
-import Link from "next/link";
 import useSWR from "swr";
 import { supabase } from "../utils/initSupabase";
 import { useEffect, useState } from "react";
@@ -68,48 +67,48 @@ const Index = () => {
       );
 
     return (
-      <>
-        {authView === "update_password" && (
-          <Auth.UpdatePassword supabaseClient={supabase} />
-        )}
-        {user && (
-          <>
-            <h4>You're signed in</h4>
-            <h5>Email: {user.email}</h5>
+      <div>
+        <NavigationBar user={user}></NavigationBar>
+        <PopularTinyHomes></PopularTinyHomes>
+      </div>
+      // <>
+      //   {authView === "update_password" && (
+      //     <Auth.UpdatePassword supabaseClient={supabase} />
+      //   )}
+      //   {user && (
+      //     <>
+      //       <h4>You're signed in</h4>
+      //       <h5>Email: {user.email}</h5>
 
-            <button type="button" onClick={() => supabase.auth.signOut()}>
-              Log out
-            </button>
-            <hr />
-            {error && <div style={{ color: "red" }}>Failed to fetch user!</div>}
-            {data && !error ? (
-              <>
-                <div style={{ color: "green" }}>
-                  User data retrieved server-side (in API route):
-                </div>
+      //       <button type="button" onClick={() => supabase.auth.signOut()}>
+      //         Log out
+      //       </button>
+      //       <hr />
+      //       {error && <div style={{ color: "red" }}>Failed to fetch user!</div>}
+      //       {data && !error ? (
+      //         <>
+      //           <div style={{ color: "green" }}>
+      //             User data retrieved server-side (in API route):
+      //           </div>
 
-                <pre>{JSON.stringify(data, null, 2)}</pre>
-              </>
-            ) : (
-              <div>Loading...</div>
-            )}
+      //           <pre>{JSON.stringify(data, null, 2)}</pre>
+      //         </>
+      //       ) : (
+      //         <div>Loading...</div>
+      //       )}
 
-            <Link href="/profile">
-              <a>SSR example with getServerSideProps</a>
-            </Link>
-          </>
-        )}
-      </>
+      //       <Link href="/profile">
+      //         <a>SSR example with getServerSideProps</a>
+      //       </Link>
+      //     </>
+      //   )}
+      // </>
     );
   };
 
   return (
     <div>
-      <NavigationBar></NavigationBar>
-      <PopularTinyHomes></PopularTinyHomes>
-      {/* <div style={{ maxWidth: "520px", margin: "96px auto" }}>
-        <View />
-      </div> */}
+      <View />
     </div>
   );
 };
